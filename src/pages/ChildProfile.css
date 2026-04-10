@@ -1,0 +1,18 @@
+.max-w-2xl {
+  max-width: 800px;
+}
+.self-start {
+  align-self: flex-start;
+}
+.rounded-md {
+  border-radius: var(--radius-md);
+}
+.p-3 {
+  padding: 0.75rem;
+}
+.bg-secondary-light {
+  background-color: var(--secondary-light);
+}
+.font-medium {
+  font-weight: 500;
+}

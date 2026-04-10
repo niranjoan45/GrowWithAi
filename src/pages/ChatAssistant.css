@@ -1,0 +1,45 @@
+.chat-container {
+  height: calc(100vh - 4rem);
+  display: flex;
+  flex-direction: column;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.chat-card {
+  flex: 1;
+  padding: 0;
+  overflow: hidden;
+  background-color: var(--surface);
+}
+
+.chat-messages {
+  background-color: #FAFCFE;
+  overflow-y: auto;
+}
+
+.max-w-chat { max-width: 80%; }
+.self-end { align-self: flex-end; }
+.self-start { align-self: flex-start; }
+.flex-row-reverse { flex-direction: row-reverse; }
+.rounded-full { border-radius: 9999px; }
+.flex-shrink-0 { flex-shrink: 0; }
+.rounded-2xl { border-radius: 1rem; }
+.rounded-tl-none { border-top-left-radius: 0; }
+.rounded-tr-none { border-top-right-radius: 0; }
+.bg-gray-100 { background-color: #F1F5F9; }
+.bg-gray-200 { background-color: #E2E8F0; }
+.text-gray-400 { color: #A0AEC0; }
+.text-text-main { color: var(--text-main); }
+.text-white { color: white; }
+.animate-spin { animation: spin 1s linear infinite; }
+.w-8 { width: 32px; }
+.h-8 { height: 32px; }
+.py-6 { padding-top: 1.5rem; padding-bottom: 1.5rem; }
+.px-4 { padding-left: 1rem; padding-right: 1rem; }
+.p-4 { padding: 1rem; }
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}

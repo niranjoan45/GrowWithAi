@@ -1,0 +1,11 @@
+.border-b { border-bottom: 1px solid #E2E8F0; }
+.grid { display: grid; }
+.pl-6 { padding-left: 1.5rem; }
+.bg-warning-light { background-color: var(--warning-light); }
+.border-danger { border: 1px solid var(--danger); }
+.border-secondary { border: 1px solid var(--secondary); }
+.border-warning { border: 1px solid #D69E2E; color: #744210; }
+.text-warning { color: #D69E2E; }
+.opacity-90 { opacity: 0.9; }
+.text-left { text-align: left; }
+.p-8 { padding: 2rem; }

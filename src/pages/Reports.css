@@ -1,0 +1,12 @@
+.max-w-4xl { max-width: 1024px; }
+.mx-auto { margin-left: auto; margin-right: auto; }
+.grid-cols-1 { grid-template-columns: repeat(1, minmax(0, 1fr)); }
+.md-grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.lg-grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.h-64 { height: 16rem; }
+.text-3xl { font-size: 1.875rem; }
+
+@media (max-width: 768px) {
+  .md-grid-cols-3 { grid-template-columns: repeat(1, minmax(0, 1fr)); }
+  .lg-grid-cols-2 { grid-template-columns: repeat(1, minmax(0, 1fr)); }
+}
