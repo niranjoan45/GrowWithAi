@@ -19,7 +19,7 @@ app.use((req, res, next) => {
 });
 
 // MongoDB Connection
-const MONGODB_URI = 'mongodb://localhost:27017/GrowWithAI';
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/GrowWithAI';
 
 mongoose.connect(MONGODB_URI)
   .then(() => console.log('✅ Connected to MongoDB at growWithAI'))
@@ -104,6 +104,18 @@ app.post('/api/children', async (req, res) => {
   } catch (err) {
     console.error(`❌ Save Error: ${err.message}`);
     res.status(400).json({ message: err.message });
+  }
+});
+
+app.delete('/api/children/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    await Child.findOneAndDelete({ id: parseInt(id) });
+    console.log(`✅ Deleted child with ID: ${id}`);
+    res.json({ message: 'Child deleted successfully' });
+  } catch (err) {
+    console.error(`❌ Delete Error: ${err.message}`);
+    res.status(500).json({ message: err.message });
   }
 });
 
