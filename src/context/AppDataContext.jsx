@@ -21,7 +21,7 @@ export const AppDataProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   // --- API LOGIC (MongoDB Connection) ---
-  const BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+  const BASE_URL = import.meta.env.VITE_API_URL || 'https://growwithai-2.onrender.co';
   const API_URL = `${BASE_URL}/api/children`;
 
   // Fetch data on load
