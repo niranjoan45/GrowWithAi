@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { useAppData } from '../context/AppDataContext';
-import { Calendar, User, UserPlus } from 'lucide-react';
+import { Calendar, User, UserPlus, Trash2 } from 'lucide-react';
 import './ChildProfile.css';
 
 const ChildProfile = () => {
-  const { addChild, childrenData } = useAppData();
+  const { addChild, removeChild, childrenData } = useAppData();
   const [formData, setFormData] = useState({ name: '', gender: 'Male', dob: '' });
   const [showSuccess, setShowSuccess] = useState(false);
 
@@ -99,7 +99,16 @@ const ChildProfile = () => {
                 <p className="text-sm m-0 text-muted">{child.age} • {child.gender}</p>
               </div>
             </div>
-            <button className="btn btn-outline" disabled style={{ opacity: 0.5 }}>Edit</button>
+            <div className="flex gap-2">
+              <button className="btn btn-outline" disabled style={{ opacity: 0.5 }}>Edit</button>
+              <button 
+                className="btn btn-outline flex items-center gap-1 text-danger border-danger hover-bg-danger-light" 
+                onClick={() => removeChild(child.id)}
+                title="Remove Profile"
+              >
+                <Trash2 size={16} /> Remove
+              </button>
+            </div>
           </div>
         ))}
       </div>

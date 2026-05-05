@@ -4,13 +4,25 @@ const AppDataContext = createContext();
 
 export const useAppData = () => useContext(AppDataContext);
 
+const defaultMilestones = [
+  { id: 1, category: 'Physical', title: 'Walks alone', completed: false },
+  { id: 2, category: 'Physical', title: 'Begins to run', completed: false },
+  { id: 3, category: 'Language', title: 'Says at least 15 words', completed: false },
+  { id: 4, category: 'Language', title: 'Points to things in a book', completed: false },
+  { id: 5, category: 'Social', title: 'Plays beside other children', completed: false },
+  { id: 6, category: 'Social', title: 'Shows defiance', completed: false },
+  { id: 7, category: 'Cognitive', title: 'Finds hidden things easily', completed: false },
+  { id: 8, category: 'Cognitive', title: 'Begins to sort shapes and colors', completed: false }
+];
+
 export const AppDataProvider = ({ children }) => {
   const [user, setUser] = useState(null); // null means not logged in
   const [childrenData, setChildrenData] = useState([]);
   const [loading, setLoading] = useState(true);
 
   // --- API LOGIC (MongoDB Connection) ---
-  const API_URL = 'http://localhost:5000/api/children';
+  const BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+  const API_URL = `${BASE_URL}/api/children`;
 
   // Fetch data on load
   useEffect(() => {
@@ -19,7 +31,14 @@ export const AppDataProvider = ({ children }) => {
         const response = await fetch(API_URL);
         const data = await response.json();
         if (data.length > 0) {
-          setChildrenData(data);
+          // Retroactively fix any profiles that have missing/empty milestones
+          const processedData = data.map(child => {
+             if (!child.milestones || child.milestones.length === 0) {
+                return { ...child, milestones: [...defaultMilestones] };
+             }
+             return child;
+          });
+          setChildrenData(processedData);
         } else {
           // Initialize with dummy data if DB is empty
           const dummy = [
@@ -72,7 +91,7 @@ export const AppDataProvider = ({ children }) => {
 
   const login = async (email, password) => {
     try {
-      const response = await fetch('http://localhost:5000/api/auth/login', {
+      const response = await fetch(`${BASE_URL}/api/auth/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password })
@@ -97,10 +116,24 @@ export const AppDataProvider = ({ children }) => {
       progress: 0, 
       lmsScore: 0,
       status: 'Normal', 
-      milestones: [] 
+      milestones: [...defaultMilestones] 
     };
     setChildrenData([...childrenData, newChild]);
     saveToDb(newChild);
+  };
+
+  const removeChild = async (childId) => {
+    // 1. Clean, pure state update
+    setChildrenData(prev => prev.filter(child => child.id !== childId));
+    
+    // 2. Side-effect (API Call)
+    try {
+      await fetch(`${API_URL}/${childId}`, {
+        method: 'DELETE',
+      });
+    } catch (err) {
+      console.error("Failed to delete from MongoDB", err);
+    }
   };
 
   const toggleMilestone = (childId, milestoneId) => {
@@ -159,7 +192,7 @@ export const AppDataProvider = ({ children }) => {
 
   return (
     <AppDataContext.Provider value={{
-      user, login, logout, childrenData, addChild, toggleMilestone, loading
+      user, login, logout, childrenData, addChild, removeChild, toggleMilestone, loading
     }}>
       {children}
     </AppDataContext.Provider>

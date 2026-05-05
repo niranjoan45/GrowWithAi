@@ -34,9 +34,9 @@ const AIInsights = () => {
                   <h3 className="text-lg font-bold mb-1 m-0">Status: {child.status}</h3>
                   <p className="m-0 text-sm opacity-90">
                     {child.status === 'Normal' 
-                      ? `${child.name} is hitting all major milestones for their age group. The LMS Score indicates balanced growth across all categories.`
+                      ? `${child.name} is hitting all major milestones for their age group. The Development Score indicates balanced growth across all categories.`
                       : child.status === 'Delayed'
-                      ? `Critical Alert: The LMS Score is impacted by inconsistent milestones or a significant growth gap (>50%) between categories.`
+                      ? `Critical Alert: The Development Score is impacted by inconsistent milestones or a significant growth gap (>50%) between categories.`
                       : `Attention: The AI has detected a slight developmental asymmetry. Focused play in the lagging categories is recommended.`}
                   </p>
                 </div>
@@ -45,7 +45,7 @@ const AIInsights = () => {
 
             <div className="card bg-surface border-primary-light">
                <h3 className="flex items-center gap-2 text-lg mb-4 font-bold m-0 text-primary">
-                <BrainCircuit size={20} /> LMS Score Breakdown
+                <BrainCircuit size={20} /> Development Score Breakdown
               </h3>
               <div className="grid grid-cols-3 gap-4 text-center mt-2">
                 <div className="p-3 bg-white rounded-lg shadow-sm border border-gray-100">
@@ -62,7 +62,7 @@ const AIInsights = () => {
                 </div>
               </div>
               <p className="text-xs text-muted mt-3 italic">
-                * LMS Score: {child.lmsScore || 0}. Highly optimized for clinical detection of asymmetric growth patterns.
+                * Development Score: {child.lmsScore || 0}. Highly optimized for clinical detection of asymmetric growth patterns.
               </p>
             </div>
 

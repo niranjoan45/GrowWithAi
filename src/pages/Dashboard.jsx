@@ -51,7 +51,7 @@ const Dashboard = () => {
             <div className="card bg-primary-light p-3 mb-6 flex justify-between items-center border-none shadow-none">
               <div className="flex items-center gap-2">
                 <BrainCircuit size={18} className="text-primary" />
-                <span className="text-sm font-bold text-primary">LMS AI Score</span>
+                <span className="text-sm font-bold text-primary">Development Score</span>
               </div>
               <span className="text-xl font-black text-primary">{child.lmsScore || 0}</span>
             </div>

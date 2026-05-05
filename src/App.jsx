@@ -34,7 +34,7 @@ function App() {
 
   return (
     <Router>
-      <div className="app-container animate-fade-in">
+      <div className="app-container">
         <Sidebar />
         <main className="main-content">
           <Routes>
